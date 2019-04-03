@@ -1,6 +1,7 @@
 package _10;
 
 import _10_Interfaces.TaxiPark_Interface;
+import _12.NegativeSpeedException;
 
 class TaxiPark implements TaxiPark_Interface {
     public CarSegments[] cars;
@@ -37,16 +38,23 @@ class TaxiPark implements TaxiPark_Interface {
         }
     }
 
-    public CarSegments[] getCarsByMaxSpeed(int min, int max) {
-        System.out.print("\n2. ");
-        CarSegments[] temp = cars;
-        for (int i = 0; i < cars.length; i++) {
-            if (!(cars[i].getMaxSpeed() >= min && cars[i].getMaxSpeed() <= max)) {
-                temp = removingElementByIndex(temp, i);
+        public CarSegments[] getCarsByMaxSpeed(int min, int max) throws NegativeSpeedException {
+            System.out.print("\n2. ");
+            if(min<0 || max<0){
+            throw new NegativeSpeedException();
             }
+            CarSegments[] temp = cars;
+            for (int i = 0; i < cars.length; i++) {
+                if (!(cars[i].getMaxSpeed() >= min && cars[i].getMaxSpeed() <= max)) {
+                    temp = removingElementByIndex(temp, i);
+
+                }
+
+            }
+            return temp;
         }
-        return temp;
-    }
+
+
 
     public CarSegments[] arrayCopyAndPlusOneElement(CarSegments[] car) {
         CarSegments[] temp = new CarSegments[car.length+1];

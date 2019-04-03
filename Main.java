@@ -4,10 +4,11 @@ package _10;
 import _10_Interfaces.AudiQ8;
 import _10_Interfaces.BMWX5;
 import _10_Interfaces.Car_Interface;
-import com.sun.org.apache.xpath.internal.SourceTree;
+import _12.NegativeSpeedException;
+
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NegativeSpeedException {
         CarSegments[] cars = new CarSegments[]{
                 new LadaKalina(13000,6,160,2,5),
                 new JaguarXJ(100000,15,300,9,8),
@@ -24,13 +25,13 @@ public class Main {
 
         System.out.print(endTask.CostOfAllCars());
         System.out.println(" ");
-        end=endTask.getCarsByMaxSpeed(0,420);
-
-
-
-
-        for(int i = 0; i < end.length; i++)
-            System.out.println(end[i].toString());
+        try{
+            end=endTask.getCarsByMaxSpeed(290,400);
+            for(int i = 0; i < end.length; i++)
+                System.out.println(end[i].toString());
+        }catch(Exception e){
+            System.out.println("It's impossible to display the technical specifications of the cars staying in a taxi park due to a negative speed value.\n   Car speed must be more than zero. Try again. ");
+        }
 
         Car_Interface audi = new AudiQ8();
         System.out.print(audi.getPrice(70000));
